@@ -5,7 +5,8 @@ transform.asset <- function(asset) {
   d$date      <- as.Date(d$date)
   d           <- xts(d$adjusted_close, d$date)
   names(d)[1] <- 'return'
-  d$diff      <- diff(log(d), lag = 1)
+  # d$diff      <- diff(log(d), lag = 1)
+  d$diff      <- diff(d, lag = 1)
   d[-1] # Remove the NA in the first position
 }
 
@@ -24,8 +25,8 @@ transform.assetLambda <- memoise(function(asset) {
 transform.assetLambdaParams <- function(asset) {
   d <- transform.assetLambda(asset)
   d <- data.frame(
-    param  = c(rep('rs', 4), rep('fmkl', 4)),
-    lambda = rep(c('mean', 'variance', 'skewness', 'kurtosis'), 2),
+    param  = c(rep(RS, 4), rep(FMKL, 4)),
+    lambda = rep(c(MEAN, VARIANCE, SKEWNESS, KURTOSIS), 2),
     value  = c(d[1, 1], d[2, 1], d[3, 1], d[4, 1], d[1, 2], d[2, 2], d[3, 2], d[4, 2])
   )
   d$param  <- as.character(d$param)
