@@ -5,3 +5,10 @@ load.asset <- function(asset) {
 }
 
 load.assetVLC <- function() load.asset(VLC)
+
+load.assets <- function() {
+  read.csv(paste0(DATA_ACTUAL_FOLDER, '/assets.csv')) %>%
+    select(-X) %>%
+    filter(!is.na(price)) %>%
+    mutate(date = as.Date(date), price = as.numeric(price))
+}

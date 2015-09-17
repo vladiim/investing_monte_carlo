@@ -1,3 +1,14 @@
+transform.assets <- function() {
+  load.assets()
+}
+
+transform.assetsByDate <- function(filter_year = 2015) {
+  transform.assets() %>%
+    mutate(year = as.numeric(format(date, '%Y'))) %>%
+    filter(year == filter_year) %>%
+    select(-year)
+}
+
 # ----------- helper
 
 transform.asset <- function(asset) {

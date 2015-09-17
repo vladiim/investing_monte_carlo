@@ -14,7 +14,7 @@ library( Quandl )
 library( xts )
 library( GLDEX )
 library( memoise )
-# library( quantmod )
+library( quantmod )
 
 # ----------- # # ----------- # # ----------- #
 # SET UP
@@ -82,8 +82,8 @@ ILB  <- 'SPBDAIBT' # ASX:ILB iShares Government Inflation ETF
 REIT <- '' # 'INDEX_WGREIT' # Global REIT, to match AusSuper's REIT
 FIX  <- '' # Int fixed securities, to match AusSuper's internation fixed
 
-AUS_SECS <- c(VLC, VSOK VTS, VEU, IJH, ILB)
-
+AUS_SECS <- c(VLC, VTS, VEU, IJH, ILB)
+SYMBOLS  <- c('VLC.AX', 'VSO.AX', 'VTS.AX', 'VEU.AX', 'VGE.AX')
 # Load code
 dirs <- c( 'extract', 'load', 'transform', 'graphs', 'sim', 'lib' )
 lapply( dirs, loadDir )
